@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <% include ./partials/header.ejs %>
+    <h2 class="text-center text-primary mt-4">Posts</h2>
+    <div class="box d-flex row p-5">
+        <% allPosts.reverse().forEach((post)=>{ %>
+            <div class="card m-3 col-12 col-md-6 col-lg-4 p-3" style="width: 18rem;">
+                <img src="../images/uploads/<%= post.postimage %>" style="height: 250px; object-fit: cover;" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><%= post.userid.username %></h5>
+                  <p class="card-text"> <%= post.post %> </p>
+                  <h6 class="mb-3" style="font-weight: 600;">likes <%= post.likes.length %></h6>
+                  <a href="like/<%= post._id %>" class="btn <%= post.likes.indexOf(user.id) === -1 ? 'btn-primary' : 'btn-danger' %>"> <%= post.likes.indexOf(user.id) === -1 ? "Like" : "Unlike" %> </a>
+                </div>
+              </div>
+        <% })%>
+    </div>
+    <% include ./partials/footer.ejs %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
